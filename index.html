@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Resume - Shumaila Waheed</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile">
+                <div class="profile-pic-wrapper">
+                    <img src="file:///C:/Users/HAJI%20LAPTOP%20KARACHI/Downloads/ai-generated-8123060_1280%20(1).webp" alt="Profile Picture" class="profile-pic">
+                </div>
+                <div class="profile-info">
+                    <h1 contenteditable="true">Shumaila Waheed</h1>
+                    <p contenteditable="true">Web Developer</p>
+                    <div class="contact-info">
+                        <p>Email: <a href="mailto:shumaila@example.com" contenteditable="true">shumaila@example.com</a></p>
+                        <p>Phone: <a href="tel:+923001234567" contenteditable="true">+92-315-7392971</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="summary">
+            <div class="container">
+                <h2>Summary</h2>
+                <p contenteditable="true">
+                    I am a passionate Web Developer with experience in building interactive and responsive web applications. 
+                    My expertise includes HTML, CSS, JavaScript, TypeScript, and various front-end and back-end technologies. 
+                    I am committed to creating user-friendly and efficient solutions while continuously learning and adapting to new technologies.
+                </p>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="container">
+                <h2>Education</h2>
+                <div class="card" data-editable="true">
+                    <h3 contenteditable="true">BS in Computer Science</h3>
+                    <p contenteditable="true">ABC University (2019 - 2023)</p>
+                </div>
+                <div class="card" data-editable="true">
+                    <h3 contenteditable="true">High School Diploma</h3>
+                    <p contenteditable="true">XYZ School (2017 - 2019)</p>
+                </div>
+                <div class="card" data-editable="true">
+                    <h3 contenteditable="true">Masters in Software Engineering</h3>
+                    <p contenteditable="true">DEF Institute (2023 - 2025)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <button id="toggleSkills">Show Skills</button>
+                <div id="skillsContainer">
+                    <h2>Skills</h2>
+                    <div id="skillsList" class="skills-grid hidden">
+                        <div class="card" contenteditable="true">
+                            <p>HTML, CSS, JavaScript</p>
+                        </div>
+                        <div class="card" contenteditable="true">
+                            <p>TypeScript, React.js, Next.js</p>
+                        </div>
+                        <div class="card" contenteditable="true">
+                            <p>Node.js, Express.js</p>
+                        </div>
+                        <div class="card" contenteditable="true">
+                            <p>Git, GitHub</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="work-experience">
+            <div class="container">
+                <h2>Work Experience</h2>
+                <div class="card" data-editable="true">
+                    <h3 contenteditable="true">Frontend Developer Intern</h3>
+                    <p contenteditable="true">XYZ Tech (Jan 2023 - Present)</p>
+                </div>
+                <div class="card" data-editable="true">
+                    <h3 contenteditable="true">Freelance Developer</h3>
+                    <p contenteditable="true">Fiverr, Upwork (2021 - Present)</p>
+                </div>
+                <div class="card" data-editable="true">
+                    <h3 contenteditable="true">Software Engineer</h3>
+                    <p contenteditable="true">ABC Solutions (Jun 2025 - Present)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="actions">
+            <div class="container">
+                <button id="saveChanges">Save Changes</button>
+                <button id="shareLink">Get Shareable Link</button>
+                <button id="downloadPdf">Download as PDF</button>
+                <p id="shareUrl" style="display:none;"></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
