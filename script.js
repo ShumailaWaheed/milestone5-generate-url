@@ -1,107 +1,62 @@
-document.addEventListener('DOMContentLoaded', () => {
-    function makeEditable() {
-        const editableSections = document.querySelectorAll('[contenteditable="true"]');
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.getElementById('toggleSkills');
+    const skillsList = document.getElementById('skillsList');
+    const skillsHeading = document.querySelector('#skillsContainer h2');
+    const saveButton = document.getElementById('saveChanges');
+    const shareButton = document.getElementById('shareLink');
+    const downloadButton = document.getElementById('downloadPdf');
+    const shareUrl = document.getElementById('shareUrl');
 
-        editableSections.forEach(section => {
-            section.addEventListener('click', () => {
-                const isEditable = section.isContentEditable;
-                section.contentEditable = !isEditable;
-                section.style.border = isEditable ? 'none' : '1px solid #ccc';
-                section.focus();
-            });
+    // Toggle Skills
+    if (toggleButton && skillsList && skillsHeading) {
+        toggleButton.addEventListener('click', function () {
+            if (skillsList.classList.contains('hidden')) {
+                skillsList.classList.remove('hidden');
+                skillsHeading.style.display = 'block';
+                toggleButton.textContent = 'Hide Skills';
+            } else {
+                skillsList.classList.add('hidden');
+                skillsHeading.style.display = 'none';
+                toggleButton.textContent = 'Show Skills';
+            }
         });
     }
 
-    function toggleSkills() {
-        const toggleButton = document.getElementById('toggleSkills');
-        const skillsList = document.getElementById('skillsList');
-        const skillsHeading = document.querySelector('#skillsContainer h2');
-
-        if (toggleButton && skillsList && skillsHeading) {
-            toggleButton.addEventListener('click', () => {
-                const isHidden = skillsList.classList.contains('hidden');
-
-                if (isHidden) {
-                    skillsList.classList.remove('hidden');
-                    skillsHeading.style.display = 'block';
-                    toggleButton.textContent = 'Hide Skills';
-                } else {
-                    skillsList.classList.add('hidden');
-                    skillsHeading.style.display = 'none';
-                    toggleButton.textContent = 'Show Skills';
-                }
-            });
-        } else {
-            console.error('Elements with the specified IDs are not found.');
-        }
+    // Save changes functionality
+    if (saveButton) {
+        saveButton.addEventListener('click', function() {
+            alert("Changes saved successfully!");
+        });
     }
 
-    function saveChanges() {
-        const saveButton = document.getElementById('saveChanges');
-        if (saveButton) {
-            saveButton.addEventListener('click', () => {
-                alert('Changes saved!'); // Replace with actual save functionality
-            });
-        } else {
-            console.error('Save button not found.');
-        }
+    // Shareable link functionality
+    if (shareButton) {
+        shareButton.addEventListener('click', function() {
+            shareUrl.style.display = "block";
+            shareUrl.textContent = "https://example.com/shareable-link"; // Replace with actual URL
+        });
     }
 
-    function getShareableLink() {
-        const shareButton = document.getElementById('shareLink');
-        const shareUrlElement = document.getElementById('shareUrl');
-        if (shareButton && shareUrlElement) {
-            shareButton.addEventListener('click', () => {
-                const username = prompt("Enter your username");
-                if (username) {
-                    fetch('/create-resume', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            username: username,
-                            resumeData: {
-                                summary: document.querySelector('#summary p').innerText,
-                                education: Array.from(document.querySelectorAll('#education .card')).map(card => card.innerText).join(' | '),
-                                skills: Array.from(document.querySelectorAll('#skills .card')).map(card => card.innerText).join(' | '),
-                                workExperience: Array.from(document.querySelectorAll('#work-experience .card')).map(card => card.innerText).join(' | ')
-                            }
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        shareUrlElement.style.display = 'block';
-                        shareUrlElement.innerText = `Shareable Link: ${data.url}`;
-                    })
-                    .catch(error => console.error('Error:', error));
-                }
-            });
-        } else {
-            console.error('Share button or share URL element not found.');
-        }
-    }
+    // Download as PDF functionality
+    if (downloadButton) {
+        downloadButton.addEventListener('click', function() {
+            const resumeContent = document.getElementById('resumeContent'); // Ensure this ID matches an element in your HTML
+            if (resumeContent) {
+                const options = {
+                    margin: 1,
+                    filename: 'Shumaila_Waheed_Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
 
-    function downloadPdf() {
-        const downloadButton = document.getElementById('downloadPdf');
-        if (downloadButton) {
-            downloadButton.addEventListener('click', () => {
-                const username = prompt("Enter your username");
-                if (username) {
-                    const resumeId = prompt("Enter resume ID");
-                    if (resumeId) {
-                        window.open(`http://localhost:3000/download/${resumeId}`, '_blank');
-                    }
-                }
-            });
-        } else {
-            console.error('Download button not found.');
-        }
+                html2pdf().from(resumeContent).set(options).save().catch(error => {
+                    console.error('Error generating PDF:', error);
+                    alert('Failed to generate PDF. Please try again.');
+                });
+            } else {
+                alert('Resume content not found.');
+            }
+        });
     }
-
-    makeEditable();
-    toggleSkills();
-    saveChanges();
-    getShareableLink();
-    downloadPdf();
 });
