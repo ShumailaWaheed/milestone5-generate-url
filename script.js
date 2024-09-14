@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const downloadButton = document.getElementById('downloadPdf');
     const shareUrl = document.getElementById('shareUrl');
 
-    // Toggle Skills
     if (toggleButton && skillsList && skillsHeading) {
         toggleButton.addEventListener('click', function () {
             if (skillsList.classList.contains('hidden')) {
@@ -28,19 +27,16 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Changes saved successfully!");
         });
     }
-
-    // Shareable link functionality
     if (shareButton) {
         shareButton.addEventListener('click', function() {
             shareUrl.style.display = "block";
-            shareUrl.textContent = "https://example.com/shareable-link"; // Replace with actual URL
+            shareUrl.textContent = "https://example.com/shareable-link"; 
         });
     }
 
-    // Download as PDF functionality
     if (downloadButton) {
         downloadButton.addEventListener('click', function() {
-            const resumeContent = document.getElementById('resumeContent'); // Ensure this ID matches an element in your HTML
+            const resumeContent = document.getElementById('resumeContent'); 
             if (resumeContent) {
                 const options = {
                     margin: 1,
